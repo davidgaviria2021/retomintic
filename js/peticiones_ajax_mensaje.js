@@ -226,7 +226,7 @@ function guardarInformacion(){
 
 
 
-//Funcion (PUT) Editar o Actualizar registro de la tabla Gastos
+//Funcion (PUT) Editar o Actualizar registro de la tabla mensajes
 function editar_Informacion(){
     let myData={
         id:$("#idhm").val(),
