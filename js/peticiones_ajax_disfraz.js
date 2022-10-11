@@ -71,7 +71,7 @@ function consultar_todo(){
 				filas += "</tr>";
 			}
 			filas += "</table>"
-			$("#resultado").append(tabla + filas + "<tr><th colspan='2'>TOTAL:<td>$" + total + "</center>") // apend es agregar tabla
+			$("#resultado").append(tabla + filas + "<tr><th colspan='2'><td>" + "</center>") // apend es agregar tabla
 			console.log(json)
 			
 			
