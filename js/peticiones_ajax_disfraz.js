@@ -5,19 +5,19 @@
 
 function limpiar_formulario(){
 	//if (confirm("Esta seguro que desea limpiar el formulario?")){
-		var campoTextoID = document.getElementById("idh");
-		var campoTextoName = document.getElementById("nameh");
-		var campoTextoEmail = document.getElementById("emailh");
-		var campoTextoAge = document.getElementById("ageh");
-		//var campoTextoDesc = document.getElementById("desc");
+		var campoTextoID = document.getElementById("idhd");
+		var campoTextoBrand = document.getElementById("brandh");
+		var campoTextoModel = document.getElementById("modelh");
+		var campoTextoCategory = document.getElementById("categoryh");
+		var campoTextoName = document.getElementById("namehd");
 		//var campoTextoUser = document.getElementById("user");
 		var divResultado = document.getElementById("resultado");
 		
 		campoTextoID.value = "";
+		campoTextoBrand.value = "";
+		campoTextoModel.value = "";
+		campoTextoCategory.value = "";
 		campoTextoName.value = "";
-		campoTextoEmail.value = "";
-		campoTextoAge.value = "";
-		//campoTextoDesc.value = "";
 		//campoTextoUser.value = "";		
 		divResultado.innerHTML = ""
 		
@@ -38,7 +38,7 @@ function limpiar_formulario(){
 //Funcion (GET) consultar o traer toda la informacion o registro de la tabla gastos
 function consultar_todo(){
     $.ajax({              // con este hago el llmado ala libreria jquery 
-        url: 'https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client',
+        url: 'https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/costume/costume',
         type:"GET",
         datatype:"json",
 		
@@ -55,23 +55,23 @@ function consultar_todo(){
             //crearRespuestaGastos(respuesta.items)
 			
 			$("#resultado").empty();
-			tabla = "<center> <table border='1'> <tr> <th>ID:</th> <th>NOMBRE:</th> <th>EMAIL:</th> <th>EDAD CLIENTE</th>  </tr> </tr>"
+			tabla = "<center> <table border='1'> <tr> <th>ID:</th> <th>MARCA:</th> <th>MODELO:</th> <th>CATEGORIA_ID:</th> <th>NOMBRE:</th>   </tr> </tr>"
 			total = 0;
 			filas = ""
 			for (i=0; i<json.items.length; i++){
 				filas += "<tr>";
 				filas += "<td>" + json.items[i].id + "</td>";
+				filas += "<td>" + json.items[i].brand + "</td>";
+				filas += "<td>" + json.items[i].model + "</td>";
+				filas += "<td>" + json.items[i].category_id + "</td>";
 				filas += "<td>" + json.items[i].name + "</td>";
-				filas += "<td>" + json.items[i].email + "</td>";
-				filas += "<td>" + json.items[i].age + "</td>";
-				//filas += "<td>" + json.items[i].descripcion + "</td>";
 				//filas += "<td>" + json.items[i].nombre_usuario + "</td>";
 				filas += "<td> <button onclick='borrar_registro("+json.items[i].id+")'>Borrar</button>";//se agrega el boton y este tiene la funcion borrar registro:
 				total += json.items[i].valor
 				filas += "</tr>";
 			}
 			filas += "</table>"
-			$("#resultado").append(tabla + filas + "<tr><th colspan='2'><td>" +  "</center>") // apend es agregar tabla
+			$("#resultado").append(tabla + filas + "<tr><th colspan='2'>TOTAL:<td>$" + total + "</center>") // apend es agregar tabla
 			console.log(json)
 			
 			
@@ -176,30 +176,30 @@ function consultaID(id){
 
 function guardarInformacion(){
 	
-	if(!validarCampo($("#nameh"))){      // con dos condicionales hacemos una validacion para nombre y valor
-		alert("Debe ingresar el nombre");
+	if(!validarCampo($("#brandh"))){      // con dos condicionales hacemos una validacion para nombre y valor
+		alert("Debe ingresar la marca");
 		return;
 	}
 	
-	if(!validarCampo($("#ageh"))){
-		alert("Debe ingresar edad");
+	if(!validarCampo($("#modelh"))){
+		alert("Debe ingresar un modelo");
 		return;
 	}	
 	
     $.ajax({
-        url: 'https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client',
+        url: 'https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/costume/costume',
 		
 		//type: 'POST',
 		//dataType: 'json',
 		
 		data:{  
-			id: $("#idh").val(),                                  // se pasa en formatojson
-			name: $("#nameh").val(),
-			email: $("#emailh").val(),
+			id: $("#idhd").val(),                                  // se pasa en formatojson
+			brand: $("#brandh").val(),
+			model: $("#modelh").val(),
 			//fecha: "23/09/2022",
 			//fecha: $("#stars").val("date"),
-			age: $("#ageh").val(),			
-			//descripcion: $("#desc").val(),
+			category_id: $("#categoryh").val(),			
+			name: $("#namehd").val(),
 			//nombre_usuario: $("#user").val()			
 		},
 		
@@ -243,21 +243,21 @@ function guardarInformacion(){
 //Funcion (PUT) Editar o Actualizar registro de la tabla Gastos
 function editar_Informacion(){
     let myData={
-        id:$("#idh").val(),
-        name:$("#nameh").val(),
-        email:$("#emailh").val(),
+        id:$("#idhd").val(),
+        brand:$("#brandh").val(),
+        model:$("#modelh").val(),
 		//fecha: "23/09/2022",
-		age:$("#ageh").val(),
-        //descripcion:$("#desc").val(),
+		category_id:$("#categoryh").val(),
+        name:$("#namehd").val(),
         //nombre_usuario:$("#user").val()
     };
     console.log(myData);
     let dataToSend = JSON.stringify(myData);
 	
-	if (confirm("Está seguro de eliminar el registro:  " + $("#idh").val() + "  ??")){
+	if (confirm("Está seguro de eliminar el registro:  " + $("#idhd").val() + "  ??")){
 		
 		$.ajax({
-			url:"https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
+			url:"https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/costume/costume",
 			type:"PUT",
 			data:dataToSend,
 			contentType:"application/JSON",
@@ -288,7 +288,7 @@ function borrar_registro(idElemento){
 	if (confirm("Está seguro de eliminar el registro:  " + idElemento + "  ??")){
 	
 		$.ajax({
-			url:"https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
+			url:"https://g82beacfb9397fa-klsuxvsux22hhigg.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/costume/costume",
 			type:"DELETE",
 			data:dataToSend,
 			contentType:"application/JSON",

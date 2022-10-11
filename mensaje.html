@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-	<title>RETO 2 - DISFRAZ</title>
+	<title>RETO 2 - CLIENTES</title>
+	
 	
     <link href="css/estilos.css" rel="stylesheet">
 	
-	<script  src="js/peticiones_ajax_Gastos.js"></script>
+	<script  src="js/peticiones_ajax_mensaje.js"></script>
 	
 	<!-- <script  src="js/jquery-3.6.1.js"></script> -->
 		
@@ -25,48 +26,34 @@
 <body>
 	<center>
 	
-	<h1>GESTION DE TABLA GASTOS</h1>
+	<h1>GESTION DE TABLA DE MENSAJES</h1>
 	<hr style="width: 500px;"> <!--separador de temas con linea -->
 	<br>
 	<fieldset style="width: 600px;"> <!-- MARCO AGRUPA-->
-	<legend>Informacion tabla Gastos:</legend>
+	<legend>Informacion tabla MENSAJES:</legend>
 	
 	<table border="0">
 	
 	<tr>
-		<th><span style="color:blue;"><b>ID:</b></th>
+		<th><span style="color:red;"><b>ID:</b></th>
 		<td>			
-			<input type="number" id="idh" style="width: 55%;" placeholder="Ingresa un ID">
+			<input type="number" id="idhm" style="width: 55%;" placeholder="Ingresa un ID">
 			<input type="button" id="btnBuscarID" value="Buscar ID" onclick="consultaID('#id')">
 		</td>	
 	</tr>
 	
 	<tr>
-		<th><span style="color: blue; align"><b>Nombre:</b></th>
+		<th><span style="color: red; align"><b>Mensaje:</b></th>
 		<td>
 			
-			<input type="text" id="nameh" style="width: 95%;" placeholder="Ingresa un nombre">		
+			<input type="text" id="messagetexth" style="width: 95%;" placeholder="Ingresa un mensaje">		
 		</td>	
 	
 	</tr>
 	
-	<tr>
-		<th><span style="color: blue;"><b>Email:</b></th>
-		<td>
-			
-			<input type="text" id="emailh" style="width: 75%;" placeholder="Ingresa Email">		
-		</td>	
+
 	
-	</tr>
 	
-	<tr>
-		<th><span style="color: blue;"><b>Edad Cliente:</b></th>
-		<td>
-			
-			<input type="number" id="ageh" style="width: 75%;" placeholder="Ingresa edad">		
-		</td>	
-	
-	</tr>
 	
 <!--<tr>
 		<th><span style="color: blue;"><b>Descripcion:</b></th>
@@ -119,9 +106,5 @@
 
 
 </html>
-
-
-
-
 
 
